@@ -9,7 +9,15 @@
 module.exports = function(grunt) {
 
   var fs = require('fs'),
-      async = grunt.util.async;
+      async;
+
+  if(typeof grunt.util !== "undefined" && typeof grunt.util.async !== "undefined") {
+    async = grunt.util.async;
+  }
+
+  else {
+    async = grunt.utils.async;
+  }
 
   grunt.registerMultiTask('rev', 'Assets revving task for Grunt', function() {
 
@@ -23,7 +31,7 @@ module.exports = function(grunt) {
       var file = grunt.file.expand(filename),
           lines = grunt.file.read(file).split(/\r\n|\r|\n/);
 
-      var assetPattern = /(style|script)(.*)['"=]([^?*:;{}\\]+\.(css|js))(\?\d*)?['">]/i,
+      var assetPattern = /(link|style|script)(.*)['"=]([^?*:;{}\\]+\.(css|js))(\?\d*)?['">]/i,
           assetFileName = /([^'"=?*:;{}\\]+\.(css|js))(\?\d*)?/;
 
       lines.forEach(function(el, index, array){
