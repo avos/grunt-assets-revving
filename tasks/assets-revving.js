@@ -9,22 +9,20 @@
 module.exports = function(grunt) {
 
   var fs = require('fs'),
-      async;
-
-  if(typeof grunt.util !== "undefined" && typeof grunt.util.async !== "undefined") {
-    async = grunt.util.async;
-  }
-
-  else {
-    async = grunt.utils.async;
-  }
+      async = grunt.util.async;
 
   grunt.registerMultiTask('rev', 'Assets revving task for Grunt', function() {
 
+    console.log("this", this)
+
     var options = this.data,
-        files = grunt.file.expandFiles(options.files),
+        files = [],
         found = false,
         time = new Date().getTime();
+
+    files.push(options.files)
+
+    console.log("files", files)
 
     async.forEach(files, function(filename, next) {
 
