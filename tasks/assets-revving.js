@@ -13,16 +13,12 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('rev', 'Assets revving task for Grunt', function() {
 
-    console.log("this", this)
-
     var options = this.data,
         files = [],
         found = false,
         time = new Date().getTime();
 
     files.push(options.files)
-
-    console.log("files", files)
 
     async.forEach(files, function(filename, next) {
 
